@@ -62,9 +62,9 @@
                                             
                                             <li><a href="#">Blog</a>
                                                 <ul class="submenu">
-                                                    <li><a href="blog.html">Blog</a></li>
+                                                    
                                                     <li><a href="{{ route('blog.details') }}">Blog Details</a></li>
-                                                    <li><a href="elements.html">Element</a></li>
+                                                    
                                                 </ul>
                                             </li>
                                             <li><a href="{{ route('dashboard') }}">Profile</a></li>
@@ -113,7 +113,19 @@
                         </div>
                         
     <div class="row">
-       
+   
+        @foreach($courses as $course)
+            <div class="col-md-4">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ $course->name }}</h5>
+                        <p class="card-text">Field: {{ $course->field }}</p>
+                        <p class="card-text">Duration: {{ $course->duration }} hours</p>
+                    </div>
+                </div>
+            </div>
+        @endforeach
+    
     </div>
 
 

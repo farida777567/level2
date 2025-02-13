@@ -11,10 +11,12 @@ use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CourseController;
 
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
+Route::get('/home', [CourseController::class, 'index'])->name('home');
 Route::middleware('guest')->group(function () {
     Route::get('register', [RegisteredUserController::class, 'create'])
         ->name('register');

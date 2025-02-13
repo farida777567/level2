@@ -8,7 +8,14 @@ use App\Models\Course;
 
 class CourseController extends Controller
 {
-   
+    public function index()
+    {
+        // Fetch all courses from the database
+        $courses = Course::all();
+
+        // Pass the courses to the home view
+        return view('home', compact('courses'));
+    }
 
     public function store(Request $request)
     {
@@ -38,15 +45,5 @@ class CourseController extends Controller
         return redirect()->back()->with('success', 'Course added successfully!');
     }
 
-    public function index()
-    {
-        // Fetch all courses from the database
-        $courses = Course::all();
-
-        // Debugging: Check if courses are being retrieved
-        dd($courses);
-
-        // Pass the courses to the home view
-        return view('home', compact('courses'));
-    }
+   
 }
