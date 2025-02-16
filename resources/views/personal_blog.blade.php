@@ -64,10 +64,10 @@
                                                 <ul class="submenu">
                                                     
                                                     <li><a href="{{ route('courses.create') }}">Blog Details</a></li>
-                                                    <li><a href="{{ route('personal.blog') }}">Personal Blog</a></li>
                                                     
                                                 </ul>
                                             </li>
+                                            <li><a href="{{ route('home') }}">Home</a></li>
                                             <li><a href="{{ route('dashboard') }}">Profile</a></li>
                                             
                                         </ul>
@@ -95,7 +95,7 @@
                         <div class="row">
                             <div class="col-xl-8 col-lg-11 col-md-12">
                                 <div class="hero__caption hero__caption2">
-                                    <h1 data-animation="bounceIn" data-delay="0.2s">Our courses</h1>
+                                    <h1 data-animation="bounceIn" data-delay="0.2s">Courses</h1>
                                    
                                 </div>
                             </div>
@@ -110,29 +110,52 @@
                 <div class="row justify-content-center">
                     <div class="col-xl-7 col-lg-8">
                         <div class="section-tittle text-center mb-55">
-                            <h2>Our featured courses</h2>
+                            <h2>Featured courses</h2>
                         </div>
-                        
-    <div class="row">
-   
-        @foreach($courses as $course)
-            <div class="col-md-4">
-                <div class="card mb-4">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ $course->name }}</h5>
-                        <p class="card-text">Field: {{ $course->field }}</p>
-                        <p class="card-text">Duration: {{ $course->duration }} hours</p>
+
+                        <div class="row justify-content-center">
+    @if(isset($userCourses) && $userCourses->isNotEmpty())
+        @foreach($userCourses as $course)
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card shadow border-0 rounded-lg h-100">
+                    <!-- Course Card Body -->
+                    <div class="card-body text-center d-flex flex-column justify-content-between">
+                        <h4 class="card-title font-weight-bold text-primary">{{ $course->name }}</h4>
+                        <p class="card-text"><strong>Duration:</strong> {{ $course->duration }} hours</p>
+                        <p class="card-text"><strong>Field:</strong> {{ $course->field }}</p>
                     </div>
+
+                    <div class="card-footer d-flex justify-content-between p-2">
+    <!-- Edit Button (Green) -->
+    <a href="{{ route('courses.edit', $course->id) }}" class="flex-fill text-center text-success text-decoration-none">
+        Edit
+    </a>
+
+    <!-- Delete Button (Red) -->
+    <form action="{{ route('courses.destroy', $course->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this course?');" class="flex-fill text-center">
+        @csrf
+        @method('DELETE')
+        <button type="submit" class="border-0 bg-transparent p-0 text-danger">
+            Delete
+        </button>
+    </form>
+</div>
+
                 </div>
             </div>
         @endforeach
-    
-    </div>
-
+    @else
+        <p class="text-center w-100">You haven't created any courses yet.</p>
+    @endif
+</div>
+                        
 
                     </div>
                 </div>
-               
+           
+
+
+
             </div>
         </div>
         <!-- Courses area End -->

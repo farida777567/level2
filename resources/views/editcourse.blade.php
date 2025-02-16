@@ -84,7 +84,7 @@
            <div class="row">
              <div class="col-xl-8 col-lg-11 col-md-12">
                <div class="hero__caption hero__caption2">
-                 <h1 data-animation="bounceIn" data-delay="0.2s">Add course</h1>
+                 <h1 data-animation="bounceIn" data-delay="0.2s">Update course</h1>
                  <!-- breadcrumb Start-->
                
                <!-- breadcrumb End -->
@@ -108,28 +108,29 @@
     </div>
 @endif
 
-         <h4>Create a course</h4>
-         <form class="form-contact comment_form" action="{{ route('courses.store') }}" method="POST">
+         <h4>Edit a course</h4>
+         <form class="form-contact comment_form" action="{{ route('courses.update', $course->id) }}" method="POST">
     @csrf
+    @method('PUT')
     <div class="row">
         <div class="col-sm-6">
             <div class="form-group">
-                <input class="form-control" name="name" id="name" type="text" placeholder="Name" required>
+                <input type="text" name="name" class="form-control" value="{{ $course->name }}" required>
             </div>
         </div>
         <div class="col-sm-6">
             <div class="form-group">
-                <input class="form-control" name="field" id="field" type="text" placeholder="Field" required>
+                <input type="text" name="field" class="form-control" value="{{ $course->field }}" required>
             </div>
         </div>
         <div class="col-12">
             <div class="form-group">
-                <input class="form-control" name="duration" id="duration" type="number" placeholder="Duration" required>
+                <input type="number" name="duration" class="form-control" value="{{ $course->duration }}" required>
             </div>
         </div>
     </div>
     <div class="form-group">
-        <button type="submit" class="button button-contactForm btn_1 boxed-btn">Post Course</button>
+        <button type="submit" class="button button-contactForm btn_1 boxed-btn">Save Changes</button>
     </div>
 </form>
       </div>
